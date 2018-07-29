@@ -39,7 +39,7 @@ public class FullscreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent mainIntent = new Intent(FullscreenActivity.this, LoginActivity.class);
+                Intent mainIntent = new Intent(FullscreenActivity.this, LoginViaOTPActivity.class);
                 startActivity(mainIntent);
                 finish();
 

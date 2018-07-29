@@ -12,6 +12,9 @@
     <string name="text_register">Register</string>
     <string name="text_hint_mobile">Mobile</string>
     <string name="text_hint_password">Create Password</string>
+    <string name="text_enter_code">ENTER CODE</string>
+    <string name="text_otp_message">We have sent you and SMS on +91 </string>
+    <string name="text_otp_message2">with a 4-digit verification code (OTP)</string>
 
 
     <string name="dummy_button">Dummy Button</string>

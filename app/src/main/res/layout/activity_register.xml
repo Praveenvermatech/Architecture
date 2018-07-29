@@ -29,7 +29,9 @@
                 android:drawableLeft="@drawable/ic_mobile"
                 android:textColorHint="@color/colorPrimary"
                 android:background="@drawable/round_edittext"
-                android:hint="@string/text_hint_mobile"/>
+                android:hint="@string/text_hint_mobile"
+                android:maxLines="1"
+                android:inputType="phone"/>
             <!--<android.support.design.widget.TextInputLayout
                 android:id="@+id/til_password"
                 android:layout_width="match_parent"
@@ -61,6 +63,7 @@
                 android:background="@drawable/round_edittext"
                 android:textColorHint="@color/colorPrimary"
                 android:inputType="textPassword"
+                android:maxLines="1"
                 android:hint="@string/text_hint_password"/>
 
             <Button
