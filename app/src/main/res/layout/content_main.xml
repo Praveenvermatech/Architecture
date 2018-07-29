@@ -8,13 +8,25 @@
     tools:context="developervisits.com.universalapplication.common.activities.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation"
+        android:animateLayoutChanges="true">
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/frame_layout"
+        app:itemIconTint="@color/colorblue"
+        app:itemTextColor="@color/colorWhite"
+        app:menu="@menu/bottom_navigation_items"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,5 @@
-package developervisits.com.universalapplication.common.activities;
+package developervisits.com.universalapplication.authentication.activities;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,8 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import developervisits.com.universalapplication.R;
+import developervisits.com.universalapplication.common.activities.MainActivity;
+import developervisits.com.universalapplication.common.activities.SplashScreenActivity;
 
 /**
  * Created by developervisits on ${DATE}.
@@ -74,5 +77,24 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+
+        // Register here
+        button_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToOTPScreen();
+            }
+        });
+
     }
+
+    private void goToOTPScreen() {
+
+        Intent mainIntent = new Intent(RegisterActivity.this, LoginViaOTPActivity.class);
+        startActivity(mainIntent);
+        finish();
+    }
+
+
+
 }

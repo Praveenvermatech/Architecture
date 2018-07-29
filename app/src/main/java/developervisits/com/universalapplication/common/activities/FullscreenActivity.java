@@ -9,6 +9,8 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import developervisits.com.universalapplication.R;
+import developervisits.com.universalapplication.authentication.activities.LoginViaOTPActivity;
+import developervisits.com.universalapplication.authentication.activities.RegisterActivity;
 
 /**
  * Created by developervisits on 28/07/18.

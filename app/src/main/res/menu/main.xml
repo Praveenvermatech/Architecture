@@ -2,8 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_shopping_cart"
+        android:icon="@drawable/ic_shopping_cart_white"
+        android:title="@string/text_shopping_cart"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_notifications"
+        android:icon="@drawable/count_bubble_shape"
+        android:title="@string/text_notifications"
+        android:visible="true"
+        app:showAsAction="always"
+        />
 </menu>

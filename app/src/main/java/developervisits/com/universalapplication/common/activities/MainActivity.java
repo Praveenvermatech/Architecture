@@ -1,8 +1,14 @@
 package developervisits.com.universalapplication.common.activities;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,10 +19,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import developervisits.com.universalapplication.common.constant.AppConstant;
+import developervisits.com.universalapplication.common.managers.TenantSettingManager;
+import developervisits.com.universalapplication.common.utils.BadgeDrawable;
+import developervisits.com.universalapplication.home.fragments.CalendarFragment;
+import developervisits.com.universalapplication.home.fragments.SubscriptionFragment;
 import developervisits.com.universalapplication.R;
+import developervisits.com.universalapplication.home.fragments.WalletFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private int notificationCount = 2;
+    private LayerDrawable icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +48,41 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        // bottom NavigationView menu
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment selectedFragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.action_item1:
+                                selectedFragment = SubscriptionFragment.newInstance("","");
+                                break;
+                            case R.id.action_item2:
+                                selectedFragment = CalendarFragment.newInstance("","");
+                                break;
+                            case R.id.action_item3:
+                                selectedFragment = WalletFragment.newInstance("","");
+                                break;
+                        }
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.commit();
+                        return true;
+                    }
+                });
+
+        //Manually displaying the first fragment - one time only
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, SubscriptionFragment.newInstance("",""));
+        transaction.commit();
+
     }
 
     @Override
@@ -49,7 +99,41 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_notifications);
+        if(TenantSettingManager.getInstance().isNotificationsVisible()) {
+            menuItem.setVisible(true);
+            notificationCount = initializeNotificationBadgeCount();
+            icon = (LayerDrawable) menuItem.getIcon();
+
+        }else{
+            menuItem.setVisible(false);
+        }
+        setBadgeCount(this, icon, notificationCount,getResources().getString(R.string.text_notifications));
+
         return true;
+    }
+
+    private void setBadgeCount(MainActivity mainActivity, LayerDrawable icon, int notificationCount, String string) {
+
+        BadgeDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BadgeDrawable) {
+            badge = (BadgeDrawable) reuse;
+        } else {
+            badge = new BadgeDrawable(this, notificationCount, getResources().getString(R.string.text_notifications));
+        }
+
+        badge.setCount(notificationCount);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
+    }
+
+    private int initializeNotificationBadgeCount() {
+
+        return notificationCount;
     }
 
     @Override
@@ -60,7 +144,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_notifications) {
+            return true;
+        }
+
+        if (id == R.id.action_shopping_cart) {
             return true;
         }
 

@@ -30,7 +30,7 @@
         </activity>
         <activity android:name=".common.activities.MainActivity" />
         <activity
-            android:name=".common.activities.LoginViaOTPActivity"
+            android:name=".authentication.activities.LoginViaOTPActivity"
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".common.activities.FullscreenActivity"
@@ -38,7 +38,7 @@
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".common.activities.RegisterActivity"
+            android:name=".authentication.activities.RegisterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_register"
             android:theme="@style/FullscreenTheme"></activity>

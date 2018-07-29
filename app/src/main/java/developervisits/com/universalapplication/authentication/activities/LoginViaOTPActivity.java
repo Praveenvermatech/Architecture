@@ -1,4 +1,4 @@
-package developervisits.com.universalapplication.common.activities;
+package developervisits.com.universalapplication.authentication.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,6 +21,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import developervisits.com.universalapplication.R;
+import developervisits.com.universalapplication.common.activities.FullscreenActivity;
+import developervisits.com.universalapplication.common.activities.MainActivity;
+import developervisits.com.universalapplication.common.activities.SplashScreenActivity;
+
+import static developervisits.com.universalapplication.common.constant.AppConstant.SPLASH_DISPLAY_TIME;
 
 
 /**
@@ -32,6 +39,9 @@ public class LoginViaOTPActivity extends Activity {
     TextView textview_otp_message;
     @BindView(R.id.textview_otp)
     TextView textview_otp;
+
+    private Handler handler = new Handler() ;
+    private boolean flag = false;
 
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
@@ -88,6 +98,20 @@ public class LoginViaOTPActivity extends Activity {
 
         textview_otp_message.setText(getResources().getString(R.string.text_otp_message)+"7503390877 "+
                 getResources().getString(R.string.text_otp_message2));
+        handler.postDelayed(new Runnable() {
+
+            public void run() {
+                Log.e("LoginViaOTP","Call Main Activity");
+                if(!flag && getIntent().getStringExtra("hasExtras")==null) {
+                    flag = true;
+                    Intent mainIntent = new Intent(LoginViaOTPActivity.this, MainActivity.class);
+                    startActivity(mainIntent);
+                    finish();
+                }
+
+
+            }
+        }, SPLASH_DISPLAY_TIME);
     }
 
     @Override
